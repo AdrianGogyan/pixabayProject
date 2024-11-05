@@ -3,6 +3,7 @@ import './App.css';
 import './Mobile.css';
 import ApiFetching from './components/apiFetching';
 import { FaSearch, FaAlignJustify } from 'react-icons/fa';
+// import ImgFullscreen from './components/imgFullscreen';
 
 function App() {
 
@@ -31,7 +32,7 @@ function App() {
 
 
   return (
-    <div>
+    <div className='App'>
       <div className='navbar'>
         <div className='logoText'>
           Pixabay
@@ -58,6 +59,9 @@ function App() {
       </div>
       <div id='searchRes'>
         {showRes && <ApiFetching searchParam={searchParam} />}
+      </div>
+      <div id="imgFullscreen">
+
       </div>
     </div>
   )
