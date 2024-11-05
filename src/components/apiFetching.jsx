@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 
-const ApiFetching = ({ searchParam }, { searchType }) => {
+const ApiFetching = ({ searchParam, searchType }) => {
     const [dataFiles, setDataFiles] = useState([]);
+    const [searchImage, setSearchImage] = useState(true);
     const [loading, setLoading] = useState(true);
     const [imgFullscreen, setImgFullscreen] = useState(null);
 
@@ -16,9 +17,12 @@ const ApiFetching = ({ searchParam }, { searchType }) => {
     }
 
     let url ='';
+
     if(searchType == 'image'){
+        setSearchImage(true);
         url = `${base_api}?key=${api_key}&q=${searchParam}&image_type=photo`;
     } else {
+        setSearchImage(false);
         url = `${base_video_api}?key=${api_key}&q=${searchParam}`;
     }
     
@@ -28,6 +32,7 @@ const ApiFetching = ({ searchParam }, { searchType }) => {
             const res = await fetch(url);
             const data = await res.json();
             setDataFiles(data.hits);
+            console.log(url);
         } catch(error){
             console.error("error fetching data:", error);
         } finally {
@@ -42,7 +47,7 @@ const ApiFetching = ({ searchParam }, { searchType }) => {
     
 
 
-    }, [searchParam]);
+    }, [searchParam, searchType]);
 
     if(loading) return <div className='loadingScreen'>Loading...</div>;
 
@@ -61,12 +66,21 @@ const ApiFetching = ({ searchParam }, { searchType }) => {
             {dataFiles.length > 0 ? (
                 dataFiles.map((image) => (
                     <div  key={image.id}>
-                        <img 
-                            className='imageFromApi' 
-                            src={image.largeImageURL} 
-                            alt={image.tags} 
-                            onClick={() => imgClickFunc(image.largeImageURL)}
-                        />
+                        { searchImage ? (
+                            <img 
+                                className='imageFromApi'
+                                src={image.largeImageURL}
+                                alt={image.tags} 
+                                onClick={() => imgClickFunc(image.largeImageURL)}
+                            />) : (
+                            <img 
+                                className='imageFromApi'
+                                src={image.videos.medium.thumbnail}
+                                alt={image.tags} 
+                                onClick={() => imgClickFunc(image.largeImageURL)}
+                            />
+                            )
+                        }
                     </div>
                 ))
             ) : (
