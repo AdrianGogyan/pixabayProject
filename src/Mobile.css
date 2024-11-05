@@ -1,0 +1,11 @@
+@media (max-width: 750px) {
+    .navbar{
+        padding: 1em 2em;
+    }
+    .navbarEl{
+        display: none;
+    }
+    .navbarElSmall{
+        display: block;
+    }
+}
