@@ -3,6 +3,7 @@ import './App.css';
 import './Mobile.css';
 import ApiFetching from './components/apiFetching';
 import { FaSearch, FaAlignJustify } from 'react-icons/fa';
+import { FaImage, FaVideo } from "react-icons/fa";
 // import ImgFullscreen from './components/imgFullscreen';
 
 function App() {
@@ -35,6 +36,14 @@ function App() {
     setSearchType(e);
   }
 
+  const switchType = () => {
+    if(searchType == 'image'){
+      setSearchType('video')
+    } else {
+      setSearchType('image')
+    }
+  }
+
 
 
   return (
@@ -50,7 +59,9 @@ function App() {
             onKeyDown={handleKeyDown}
             onChange={(e) => setSearchWord(e.target.value)} 
           />
-          <p>{searchType}</p>
+          <p onClick={switchType} >{searchType.toUpperCase()}</p>
+
+          
           <FaSearch onClick={searchFunc} />
         </div>
         <div className='navbarEl'>
@@ -60,7 +71,11 @@ function App() {
           <a href="https://pixabay.com/de/service/about/">About</a>
         </div>
         <div className='navbarElSmall'>
-          <FaAlignJustify />
+          {searchType == 'image' ? (
+              <FaVideo onClick={switchType} />
+            ) : (
+              <FaImage onClick={switchType} />
+            )}
         </div>
         
       </div>

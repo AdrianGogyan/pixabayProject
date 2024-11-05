@@ -59,6 +59,11 @@ body{
     margin: 0 1em;
 }
 
+.searchInput > p{
+    cursor: pointer;
+    margin-right: 0.5em;
+}
+
 .searchInput > input {
     flex: 1;
     border: none;
