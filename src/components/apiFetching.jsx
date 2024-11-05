@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
-const ApiFetching = ({ searchParam }) => {
-    const [images, setImages] = useState([]);
+const ApiFetching = ({ searchParam }, { searchType }) => {
+    const [dataFiles, setDataFiles] = useState([]);
     const [loading, setLoading] = useState(true);
     const [imgFullscreen, setImgFullscreen] = useState(null);
 
@@ -9,17 +9,25 @@ const ApiFetching = ({ searchParam }) => {
     useEffect(() => {    
     const api_key = '33167218-766cc9009bbf26dae43e769e3';
     const base_api = 'https://pixabay.com/api/';
+    const base_video_api = 'https://pixabay.com/api/videos/';
     if(searchParam.toLowerCase() == 'csabi'){
-        searchParam = 'Ass';
+        searchParam = 'donkey';
         console.log(searchParam);
     }
-    const url = `${base_api}?key=${api_key}&q=${searchParam}&image_type=photo`;
+
+    let url ='';
+    if(searchType == 'image'){
+        url = `${base_api}?key=${api_key}&q=${searchParam}&image_type=photo`;
+    } else {
+        url = `${base_video_api}?key=${api_key}&q=${searchParam}`;
+    }
+    
 
     const fetchData = async ()=> {
         try {
             const res = await fetch(url);
             const data = await res.json();
-            setImages(data.hits);
+            setDataFiles(data.hits);
         } catch(error){
             console.error("error fetching data:", error);
         } finally {
@@ -46,10 +54,12 @@ const ApiFetching = ({ searchParam }) => {
         setImgFullscreen(null);
     }
 
+    
+
     return(
         <div className='imageWrapper' >
-            {images.length > 0 ? (
-                images.map((image) => (
+            {dataFiles.length > 0 ? (
+                dataFiles.map((image) => (
                     <div  key={image.id}>
                         <img 
                             className='imageFromApi' 

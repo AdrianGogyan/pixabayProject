@@ -11,6 +11,8 @@ function App() {
   const [searchWord, setSearchWord] = useState('');
   const [showRes, setShowRes] = useState(false);
   const [searchParam, setSearchParam] = useState('');
+  const [searchType, setSearchType] = useState('image');
+
 
   function handleKeyDown(e){
     if(e.key === 'Enter'){
@@ -22,11 +24,15 @@ function App() {
 
   function searchFunc(){
 
-    console.log('searching for:', searchWord);
+    // console.log('searching for:', searchWord);
     setSearchParam(searchWord);
     setShowRes(true);
     setSearchWord('');
 
+  }
+
+  const searchToggle = (e) => {
+    setSearchType(e);
   }
 
 
@@ -44,13 +50,14 @@ function App() {
             onKeyDown={handleKeyDown}
             onChange={(e) => setSearchWord(e.target.value)} 
           />
+          <p>{searchType}</p>
           <FaSearch onClick={searchFunc} />
         </div>
         <div className='navbarEl'>
-          <button>Images</button>
-          <button>Video</button>
-          <button>Pixabay</button>
-          <button>About</button>
+          <button onClick={ () => searchToggle('image')} >Images</button>
+          <button onClick={ () => searchToggle('video')} >Video</button>
+          <a href="https://pixabay.com/">Pixabay</a>
+          <a href="https://pixabay.com/de/service/about/">About</a>
         </div>
         <div className='navbarElSmall'>
           <FaAlignJustify />
@@ -58,7 +65,7 @@ function App() {
         
       </div>
       <div id='searchRes'>
-        {showRes && <ApiFetching searchParam={searchParam} />}
+        {showRes && <ApiFetching searchParam={searchParam} searchType={searchType} />}
       </div>
       <div id="imgFullscreen">
 
