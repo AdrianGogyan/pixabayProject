@@ -7,6 +7,10 @@ const ApiFetching = ({ searchParam }) => {
     useEffect(() => {    
     const api_key = '33167218-766cc9009bbf26dae43e769e3';
     const base_api = 'https://pixabay.com/api/';
+    if(searchParam == 'csabi'){
+        searchParam = 'ass';
+        console.log(searchParam);
+    }
     const url = `${base_api}?key=${api_key}&q=${searchParam}&image_type=photo`;
 
     const fetchData = async ()=> {
