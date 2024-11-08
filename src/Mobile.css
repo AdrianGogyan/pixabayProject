@@ -1,11 +1,13 @@
-@media (max-width: 750px) {
-    .navbar{
-        padding: 1em 2em;
-    }
-    .navbarEl{
-        display: none;
-    }
-    .navbarElSmall{
-        display: block;
-    }
-}
+/* Desktop styles */
+@media (max-width: 768px) {
+    
+  .navbar{
+    margin-top: 1em;
+    width: 100%;
+    display: grid;
+    place-items: center;
+    justify-content: unset;
+  }
+
+  }
+  

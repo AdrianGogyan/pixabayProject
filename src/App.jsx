@@ -54,28 +54,24 @@ function App() {
         </div>
         <div className='searchInput' >
           <input 
+            className='mainInput'
             type="search" 
             value={searchWord}
             onKeyDown={handleKeyDown}
             onChange={(e) => setSearchWord(e.target.value)} 
           />
-          <p onClick={switchType} >{searchType.toUpperCase()}</p>
+          {/* <p onClick={switchType} >{searchType.toUpperCase()}</p> */}
 
           
           <FaSearch onClick={searchFunc} />
         </div>
-        <div className='navbarEl'>
-          <button onClick={ () => searchToggle('image')} >Images</button>
-          <button onClick={ () => searchToggle('video')} >Video</button>
-          <a href="https://pixabay.com/">Pixabay</a>
-          <a href="https://pixabay.com/de/service/about/">About</a>
-        </div>
+        {/* {searchType == 'image' ? (
+                <FaVideo onClick={switchType} />
+              ) : (
+                <FaImage onClick={switchType} />
+              )} */}
         <div className='navbarElSmall'>
-          {searchType == 'image' ? (
-              <FaVideo onClick={switchType} />
-            ) : (
-              <FaImage onClick={switchType} />
-            )}
+          
         </div>
         
       </div>

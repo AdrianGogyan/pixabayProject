@@ -1,125 +1,153 @@
-body{
-    width: 100vw;
-    height: 100dvh;
-    overflow-x: hidden;
-    background: #bebebe;
-}
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
-.loadingScreen{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-}
-
-/* .App{
-    z-index: 10;
-} */
-
-.navbarElSmall{
-    display: none;
-}
 
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+
+    --bgc: hsl(0, 0%, 87%);
+    --bgcMain: hsla(0, 0%, 17%, 0.836);
+    --dark--bgcMain: hsla(0, 0%, 17%, 0.99);
+    --bgcFont: hsl(0, 0%, 91%);
+
+    --fontFam: "Roboto", sans-serif;
+    
 }
 
-.imageWrapper{
-    /* margin-top: 1em; */
-    display: grid;
-    margin: 0 2em;
-    gap: 0.5em;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    align-items: center;
+body{
+    color: var(--bgcFont);
+    font-family: var(--fontFam);
+    font-weight: 100;
+    background-color: var(--bgcMain);
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: flex-start;
     justify-content: center;
 }
-/* 
-.imageWrapper > div{
-    display: contents;
-} */
-
-.navbar{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1em 4em;
+#root{
+    width: 100%;
 }
 
+.App{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .navbar{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1em;
+    gap: 1em;
+  }
 
+.logoText{
+    
+    font-size: 2em;
+    font-weight: 900;
+    word-spacing: 2em;
+}
 
 .searchInput{
-    flex: 1;
+    position: relative;
+    padding-right: 0.6em;
     display: flex;
     align-items: center;
-    padding: 0.25em;
-    background-color: #ffffff;
-    border-radius: 4px;
-    margin: 0 1em;
+    justify-content: center;
+    width: 90%;
+    background-color: var(--dark--bgcMain);
+    border-radius: 50px;
 }
 
-.searchInput > p{
-    cursor: pointer;
-    margin-right: 0.5em;
-}
-
-.searchInput > input {
-    flex: 1;
+.mainInput{
+    /* position: relative; */
+    color: var(--bgc);
+    background: transparent;
     border: none;
-    border-radius: 4px;
-
-}
-
-input:focus {
-    border: none; /* Removes default border */
-    outline: none; /* Optionally removes the outline */
-    background-color: #f0f0f0; /* Light gray background on focus */
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* Subtle shadow effect */
-}
-
-
-.imageFromApi{
+    /* font-size: 1.2em; */
+    padding: 12px;
+    padding-right: 1.5em;
     width: 100%;
-    height: 250px;
-    object-fit: cover;
-    border-radius: 20px;
-
 }
 
-.imageFromApi:hover{
-    filter:brightness(90%)
+.mainInput:focus-visible {
+    outline: none;
 }
 
-.navbarEl > * {
-    background: none;
-    border: none;
-    border-radius: 4px;
-    margin-left: 1em;
-
-    cursor: pointer;
+.searchInput > svg{
+    width: 1.5em;
+    height: 1.5em;
+    
 }
 
 a{
     text-decoration: none;
-    color: black;
+    color: var(--bgcFont);
 }
 
-.fullscreenOverlay {
-    position: fixed;
-    top: 0;
-    left: 0;
+button{
+    background: none;;
+    border: none;
+    font-family: var(--fontFam);
+    font-weight: 100;
+}
+
+
+.imageWrapper {
+    display: grid;
+    gap: 16px;
+    padding: 16px;
+    grid-template-columns: repeat(2, 1fr);  
+
+}
+  
+  /* Each image item */
+  .imageItem {
+    overflow: hidden;
+    border-radius: 8px; /* Optional rounded corners */
+    height: 200px; /* Set a fixed height for all image items */
+    display: flex;
+    align-items: center; /* Vertically center image */
+  }
+  
+  /* Make sure image fills container but keeps aspect ratio */
+  .imageItem img {
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.8);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    z-index: 100;
-}
+    object-fit: cover; /* Ensure images cover the container without stretching */
+    display: block;
+  }
+  
+  @media (max-width: 420px) {
+    .imageWrapper{
+        grid-template-columns: 1fr;
+    }
+  }
 
-.fullscreenOverlay img {
-    max-width: 90%;
-    max-height: 90%;
-}
+  /* Responsive layout for tablets and small desktops */
+  @media (min-width: 600px) {
+    .imageWrapper {
+      grid-template-columns: repeat(3, 1fr); /* Two columns */
+    }
+  }
+  
+  /* Responsive layout for larger screens */
+  @media (min-width: 992px) {
+    .imageWrapper {
+      grid-template-columns: repeat(4, 1fr); /* Four columns */
+    }
+  }
+
+
+  .fullscreenOverlay img{
+    max-width: 100%;
+    max-height: 100%;
+  }
+
+  
+  
