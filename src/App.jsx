@@ -60,7 +60,7 @@ function App() {
             onKeyDown={handleKeyDown}
             onChange={(e) => setSearchWord(e.target.value)} 
           />
-          {/* <p onClick={switchType} >{searchType.toUpperCase()}</p> */}
+          <p onClick={switchType} >{searchType.toUpperCase()}</p>
 
           
           <FaSearch onClick={searchFunc} />

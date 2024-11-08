@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { RxCross2 } from "react-icons/rx";
 
 const ApiFetching = ({ searchParam, searchType }) => {
     const [dataFiles, setDataFiles] = useState([]);
@@ -55,49 +56,52 @@ const ApiFetching = ({ searchParam, searchType }) => {
 
     return (
         <div>
-          {imgFullscreen == null ? (
-            <div className="imageWrapper">
-            {dataFiles.length > 0 ? (
-                dataFiles.map((item) => (
-                    <div key={item.id} className="imageItem">
-                        {isSearchImage ? (
-                            <img
-                                className="imageFromApi"
-                                src={item.webformatURL}
-                                alt={item.tags}
-                                onClick={() =>
-                                    imgClickFunc(item.largeImageURL)
-                                }
-                            />
-                        ) : (
-                            <img
-                                className="imageFromApi"
-                                src={item.videos?.medium?.thumbnail || ""}
-                                alt={item.tags}
-                                onClick={() =>
-                                    imgClickFunc(item.videos.medium.url)
-                                }
-                            />
-                        )}
-                    </div>
-                ))
+            {imgFullscreen == null ? (
+                <div className="imageWrapper">
+                    {dataFiles.length > 0 ? (
+                        dataFiles.map((item) => (
+                            <div key={item.id} className="imageItem">
+                                {isSearchImage ? (
+                                    <img
+                                        className="imageFromApi"
+                                        src={item.webformatURL}
+                                        alt={item.tags}
+                                        onClick={() =>
+                                            imgClickFunc(item.largeImageURL)
+                                        }
+                                    />
+                                ) : (
+                                    <img
+                                        className="imageFromApi"
+                                        src={
+                                            item.videos?.medium?.thumbnail || ""
+                                        }
+                                        alt={item.tags}
+                                        onClick={() =>
+                                            imgClickFunc(item.videos.medium.url)
+                                        }
+                                    />
+                                )}
+                            </div>
+                        ))
+                    ) : (
+                        <div>No results found</div>
+                    )}
+                </div>
             ) : (
-                <div>No results found</div>
+                <div className="fullscreenOverlay" >
+                  {/* onClick={closeFullscreen} */}
+                    {isSearchImage ? (
+                        <img src={imgFullscreen} alt="Fullscreen" />
+                    ) : (
+                        <video controls autoPlay style={{ width: "80vw" }}>
+                            <source src={imgFullscreen} type="video/mp4" />
+                            Your browser does not support the video tag.
+                        </video>
+                    )}
+                    <RxCross2 onClick={closeFullscreen} />
+                </div>
             )}
-        </div>
-          ) : (
-            <div className="fullscreenOverlay" onClick={closeFullscreen}>
-            {isSearchImage ? (
-                <img src={imgFullscreen} alt="Fullscreen" />
-            ) : (
-                <video controls autoPlay style={{ width: "80vw" }}>
-                    <source src={imgFullscreen} type="video/mp4" />
-                    Your browser does not support the video tag.
-                </video>
-            )}
-        </div>
-          )}
-
         </div>
     );
 };

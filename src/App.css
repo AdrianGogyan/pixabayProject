@@ -64,6 +64,10 @@ body{
     border-radius: 50px;
 }
 
+.searchInput p{
+    padding-right: 1em;
+}
+
 .mainInput{
     /* position: relative; */
     color: var(--bgc);
@@ -127,6 +131,10 @@ button{
     .imageWrapper{
         grid-template-columns: 1fr;
     }
+    .fullscreenOverlay svg{
+        height: 1em !important;
+        right: -10px !important;
+    }
   }
 
   /* Responsive layout for tablets and small desktops */
@@ -134,6 +142,8 @@ button{
     .imageWrapper {
       grid-template-columns: repeat(3, 1fr); /* Two columns */
     }
+    
+
   }
   
   /* Responsive layout for larger screens */
@@ -143,11 +153,29 @@ button{
     }
   }
 
+  .fullscreenOverlay{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
 
   .fullscreenOverlay img{
     max-width: 100%;
     max-height: 100%;
   }
 
-  
+  .fullscreenOverlay video {
+    max-width: 80%;
+    max-height: 80%;
+    
+  }
+  .fullscreenOverlay svg{
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 3em;
+    width: 3em;
+  }
   
